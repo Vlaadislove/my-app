@@ -2,6 +2,7 @@ import React from "react";
 import MyPost from "./My posts/MyPost";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
+import store from "../../Reduxe/state";
 
 const Profile = (props) => {
   return (
@@ -10,8 +11,9 @@ const Profile = (props) => {
       <MyPost
         post={props.profilePage.post}
         newPostText={props.profilePage.newPostText}
-        addPost={props.addPost}
-        onPostChange={props.onPostChange}
+        dispatch={props.dispatch}
+        // addPost={props.addPost}
+        // onPostChange={props.onPostChange}
       />
     </div>
   );

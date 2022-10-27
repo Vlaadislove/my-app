@@ -6,8 +6,10 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import store from "./Reduxe/state";
 
 const App = (props) => {
+
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -17,15 +19,20 @@ const App = (props) => {
           <Routes>
             <Route
               path="/dialogs/*"
-              element={<Dialogs state={props.state.dialogPage} />}
+              element={
+                <Dialogs
+                    state={props.state.dialogPage}
+                    dispatch={props.dispatch}
+              />}
             />
             <Route
               path="/profile"
               element={
                 <Profile
                   profilePage={props.state.profilePage}
-                  addPost={props.addPost}
-                  onPostChange={props.onPostChange}
+                  dispatch={props.dispatch}
+                  // addPost={props.addPost}
+                  // onPostChange={props.onPostChange}
                 />
               }
             />

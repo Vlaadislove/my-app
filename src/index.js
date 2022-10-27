@@ -13,8 +13,9 @@ let renderEntireTree = (state) => {
     <React.StrictMode>
       <App
         state={state}
-        addPost={store.addPost.bind(store)}
-        onPostChange={store.onPostChange.bind(store)}
+        dispatch={store.dispatch.bind(store)}
+        // addPost={store.addPost.bind(store)}
+        // onPostChange={store.onPostChange.bind(store)}
       />
     </React.StrictMode>
   );

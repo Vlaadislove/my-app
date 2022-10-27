@@ -20,3 +20,8 @@
 .massage {
 
 }
+
+.areaMassage textarea {
+    margin-top: 10px;
+    resize: none
+}

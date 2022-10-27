@@ -5,3 +5,7 @@
 .posts {
     margin-top: 10px;
 }
+
+.postsBlock textarea {
+    resize: none;
+}
