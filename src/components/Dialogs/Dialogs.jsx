@@ -2,7 +2,7 @@ import React from 'react';
 import s from './Dialogs.module.css'
 import DialogItem from "./DialogItem/DialogItem";
 import Massage from "./Message/Massage";
-import {addMessageActionCreator, updateNewMessageChangeActionCreator} from "../../Reduxe/state";
+import {addMessageActionCreator, updateNewMessageChangeActionCreator} from "../../Reduxe/dialogs-reducer";
 
 //                                  Прошлая версия
 //     <DialogItem name={dialogs[0].name} id={dialogs[0].id}/>,

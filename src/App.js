@@ -6,7 +6,7 @@ import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import store from "./Reduxe/state";
+
 
 const App = (props) => {
 

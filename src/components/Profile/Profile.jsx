@@ -2,7 +2,7 @@ import React from "react";
 import MyPost from "./My posts/MyPost";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import store from "../../Reduxe/state";
+import store from "../../Reduxe/store";
 
 const Profile = (props) => {
   return (
