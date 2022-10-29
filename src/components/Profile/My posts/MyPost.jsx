@@ -1,31 +1,31 @@
 import React from "react";
 import s from "./MyPost.module.css";
 import Post from "./Post/Post";
-import {addPostActionCreator, onPostChangeActionCreator} from "../../../Reduxe/profile-reducer";
-
-
+import {
+  addPostActionCreator,
+  updateNewPostActionCreator
+} from "../../../Reduxe/profile-reducer";
 
 const MyPost = (props) => {
   let newPostElement = React.createRef();
 
   let addPost = () => {
-
     // let text = newPostElement.current.value
     // props.addPost();
-      props.dispatch(addPostActionCreator())
+    props.dispatch(addPostActionCreator());
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    // props.onPostChange(text);
-      let action = onPostChangeActionCreator(text)
-      props.dispatch(action)
-
+    // props.updateNewPost(text);
+    let action = updateNewPostActionCreator(text);
+    props.dispatch(action);
   };
 
   const postElement = props.post.map((p) => (
-    <Post text={p.text} like={p.like} />));
-  const valueNewPostText = props.newPostText
+    <Post text={p.text} like={p.like} />
+  ));
+  const valueNewPostText = props.newPostText;
 
   return (
     <div className={s.postsBlock}>
@@ -38,8 +38,9 @@ const MyPost = (props) => {
             onChange={onPostChange}
             value={valueNewPostText}
             ref={newPostElement}
-            placeholder='Enter new post'
-            cols='40' rows='4'
+            placeholder="Enter new post"
+            cols="40"
+            rows="4"
           />
         </div>
         <div>

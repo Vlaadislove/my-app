@@ -1,13 +1,12 @@
-  .item {
-    color: green;
-  }
+.item {
+}
 
-  .posts {
-    color: red;
-  }
+.posts {
+  color: red;
+}
 
-  .item img {
-    width: 50px;
-    border-radius: 50px;
-  }
-
+.item img {
+  width: 50px;
+  border-radius: 50px;
+  margin-right: 10px;
+}

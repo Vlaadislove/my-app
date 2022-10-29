@@ -14,6 +14,7 @@ let renderEntireTree = (state) => {
       <App
         state={state}
         dispatch={store.dispatch.bind(store)}
+        store={store}
         // addPost={store.addPost.bind(store)}
         // onPostChange={store.onPostChange.bind(store)}
       />
@@ -23,7 +24,10 @@ let renderEntireTree = (state) => {
 
 renderEntireTree(store.getState());
 
-store.subscribe(renderEntireTree);
+store.subscribe(() => {
+  let state = store.getState();
+  renderEntireTree(state);
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
