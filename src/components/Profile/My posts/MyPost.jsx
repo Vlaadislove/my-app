@@ -1,25 +1,19 @@
 import React from "react";
 import s from "./MyPost.module.css";
 import Post from "./Post/Post";
-import {
-  addPostActionCreator,
-  updateNewPostActionCreator
-} from "../../../Reduxe/profile-reducer";
 
 const MyPost = (props) => {
+  debugger;
   let newPostElement = React.createRef();
 
   let addPost = () => {
     // let text = newPostElement.current.value
-    // props.addPost();
-    props.dispatch(addPostActionCreator());
+    props.addPost();
   };
 
   let onPostChange = () => {
     let text = newPostElement.current.value;
-    // props.updateNewPost(text);
-    let action = updateNewPostActionCreator(text);
-    props.dispatch(action);
+    props.updateNewPost(text);
   };
 
   const postElement = props.post.map((p) => (

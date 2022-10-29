@@ -1,17 +1,17 @@
 import React from "react";
-import MyPost from "./My posts/MyPost";
 import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
-import store from "../../Reduxe/store";
+import MyPostContainer from "./My posts/MyPostContainer";
 
 const Profile = (props) => {
   return (
     <div>
       <ProfileInfo />
-      <MyPost
-        post={props.profilePage.post}
-        newPostText={props.profilePage.newPostText}
-        dispatch={props.dispatch}
+      <MyPostContainer
+        store={props.store}
+        // post={props.profilePage.post}
+        // newPostText={props.profilePage.newPostText}
+        // dispatch={props.dispatch}
         // addPost={props.addPost}
         // onPostChange={props.onPostChange}
       />
