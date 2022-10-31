@@ -2,10 +2,6 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Massage from "./Message/Massage";
-import {
-  addMessageActionCreator,
-  updateNewMessageChangeActionCreator
-} from "../../Reduxe/dialogs-reducer";
 
 //                                  Прошлая версия
 //     <DialogItem name={dialogs[0].name} id={dialogs[0].id}/>,
@@ -20,27 +16,29 @@ const Dialogs = (props) => {
   //         addMassage()
   //     }
   // }
+  let state = props.dialogPage
 
   const addMassage = () => {
-    props.store.dispatch(addMessageActionCreator());
+    props.addMassage()
   };
 
   const onMassageChange = (e) => {
     // let text = newMassageElement.current.value;
     let text = e.target.value;
-    let action = updateNewMessageChangeActionCreator(text);
-    props.store.dispatch(action);
+    // let action = updateNewMessageChangeActionCreator(text);
+    props.updateNewMessageChange(text)
   };
 
   // let newMassageElement = React.createRef();
-
-  const state = props.store.getState().dialogPage;
-
   const dialogsElement = state.dialogs.map((d) => (
-    <DialogItem name={d.name} id={d.id} />
+    <DialogItem name={d.name}  id={d.id} />
+
+
   ));
+
   const massageElement = state.massages.map((m) => (
-    <Massage massage={m.massage} />
+    <Massage massage={m.massage}  />
+
   ));
   const valueNewMessageText = state.newMessageText;
 

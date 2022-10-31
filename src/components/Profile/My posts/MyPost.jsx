@@ -3,7 +3,6 @@ import s from "./MyPost.module.css";
 import Post from "./Post/Post";
 
 const MyPost = (props) => {
-  debugger;
   let newPostElement = React.createRef();
 
   let addPost = () => {
@@ -17,7 +16,7 @@ const MyPost = (props) => {
   };
 
   const postElement = props.post.map((p) => (
-    <Post text={p.text} like={p.like} />
+    <Post text={p.text}  like={p.like} />
   ));
   const valueNewPostText = props.newPostText;
 
