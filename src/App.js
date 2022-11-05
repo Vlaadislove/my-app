@@ -1,12 +1,12 @@
 import React from "react";
 import "./App.css";
-import Dialogs from "./components/Dialogs/Dialogs";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
+import UsersContainer from "./components/Users/UsersContainer";
 
 const App = (props) => {
   return (
@@ -20,7 +20,6 @@ const App = (props) => {
               path="/dialogs/*"
               element={
                 <DialogsContainer
-                  store={props.store}
                   // state={props.state.dialogPage}
                   // dispatch={props.dispatch}
                 />
@@ -38,6 +37,7 @@ const App = (props) => {
               }
             />
             <Route path="/news" element={<News />} />
+              <Route path ='users' element={<UsersContainer/>} />
           </Routes>
         </div>
       </div>

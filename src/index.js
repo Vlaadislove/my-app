@@ -11,7 +11,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 
   root.render(
       <Provider store={store}>
-    <React.StrictMode>
       <App
         // state={state}
         // dispatch={store.dispatch.bind(store)}
@@ -19,7 +18,6 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
         // addPost={store.addPost.bind(store)}
         // onPostChange={store.onPostChange.bind(store)}
       />
-    </React.StrictMode>
           </Provider>
   );
 

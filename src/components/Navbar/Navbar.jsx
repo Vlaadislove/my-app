@@ -9,6 +9,7 @@ const Navbar = () => {
     return <nav className={s.nav}>
     <div> <NavLink className={setActive} to="/profile">Profile</NavLink> </div>
     <div> <NavLink className={setActive} to="/dialogs">Massages</NavLink> </div>
+    <div> <NavLink className={setActive} to="/users">Users</NavLink> </div>
     <div> <NavLink className={setActive} to="/news">News</NavLink> </div>
     <div> <a className={s.item} href="">Music</a> </div>
     {/* <div> <a className={s.item} href="">Settings</a> </div> */}
