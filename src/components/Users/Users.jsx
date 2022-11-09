@@ -1,4 +1,32 @@
 import React from "react";
+
+
+const Users = () => {
+    return ()
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import React from "react";
 import axios from "axios";
 import usersPhoto from '../../assets/img/users.png'
 
@@ -11,51 +39,51 @@ import usersPhoto from '../../assets/img/users.png'
 
 
 
-const Users = (props) => {
-
-
-    let getUsers =() => {
-        if (props.users.length === 0) {
-            axios.get('https://social-network.samuraijs.com/api/1.0/users?page=1&count=50')
-                .then(response => {props.setUsers(response.data.items)
-                    }
-                )
-        }
-    }
-
-
-
-
-
-
-    return (
-        <div>
-            <button onClick={getUsers}>GET USERS</button>
-        {props.users.map( u =>
-            <div>
-                <div>
-                    <img src={u.photos.small != null ? u.photos.small : usersPhoto } alt=""/>
-                </div>
-                <div>{u.follow
-                    ? <button onClick={()=>{props.unfollowed(u.id)}}>FOLLOW</button>
-                    : <button onClick={()=>{props.followed(u.id)}}>UNFOLLOW</button>}
-                </div>
-                <div>
-                    Name: {u.name}
-                </div>
-                <div>
-                    Status: {u.status}
-                </div>
-
-                <div>
-                    <div>Country: {'u.location.country'}</div>
-                    <div>City: {'u.location.city'}</div>
-                </div>
-
-            </div>)}
-        </div>
-
-    )
-}
-
-export default Users
+// const Users = (props) => {
+//
+//
+//     let getUsers =() => {
+//         if (props.users.length === 0) {
+//             axios.get('https://social-network.samuraijs.com/api/1.0/users?page=1&count=50')
+//                 .then(response => {props.setUsers(response.data.items)
+//                     }
+//                 )
+//         }
+//     }
+//
+//
+//
+//
+//
+//
+//     return (
+//         <div>
+//             <button onClick={getUsers}>GET USERS</button>
+//         {props.users.map( u =>
+//             <div>
+//                 <div>
+//                     <img src={u.photos.small != null ? u.photos.small : usersPhoto } alt=""/>
+//                 </div>
+//                 <div>{u.follow
+//                     ? <button onClick={()=>{props.unfollowed(u.id)}}>FOLLOW</button>
+//                     : <button onClick={()=>{props.followed(u.id)}}>UNFOLLOW</button>}
+//                 </div>
+//                 <div>
+//                     Name: {u.name}
+//                 </div>
+//                 <div>
+//                     Status: {u.status}
+//                 </div>
+//
+//                 <div>
+//                     <div>Country: {'u.location.country'}</div>
+//                     <div>City: {'u.location.city'}</div>
+//                 </div>
+//
+//             </div>)}
+//         </div>
+//
+//     )
+// }
+//
+// export default Users
