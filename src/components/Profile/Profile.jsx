@@ -1,5 +1,4 @@
 import React from "react";
-import s from "./Profile.module.css";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import MyPostContainer from "./My posts/MyPostContainer";
 
@@ -8,11 +7,11 @@ const Profile = (props) => {
     <div>
       <ProfileInfo />
       <MyPostContainer
-        // post={props.profilePage.post}
-        // newPostText={props.profilePage.newPostText}
-        // dispatch={props.dispatch}
-        // addPost={props.addPost}
-        // onPostChange={props.onPostChange}
+      // post={props.profilePage.post}
+      // newPostText={props.profilePage.newPostText}
+      // dispatch={props.dispatch}
+      // addPost={props.addPost}
+      // onPostChange={props.onPostChange}
       />
     </div>
   );
