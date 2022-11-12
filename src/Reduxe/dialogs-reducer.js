@@ -18,16 +18,15 @@ const initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
-
-
-
   switch (action.type) {
     case ADD_MASSAGE:
+      debugger
       // let body = state.newMessageText;
       return  {
         ...state,
         newMessageText: "",
         massages: [...state.massages, {id: 5, massage: state.newMessageText}]
+
       }
 
       // stateCopy.massages.push(newMassage);

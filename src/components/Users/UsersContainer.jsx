@@ -41,9 +41,9 @@ class UsersContainer extends React.Component {
   render() {
     return (
       <>
-        {this.props.isFetching ? (
+        {this.props.isFetching ?
           <Preloader />
-        ) : (
+         :
           <Users
             totalUsersCount={this.props.totalUsersCount}
             pageSize={this.props.pageSize}
@@ -53,7 +53,7 @@ class UsersContainer extends React.Component {
             followed={this.props.followAC}
             unfollowed={this.props.unfollowAC}
           />
-        )}
+        }
       </>
     );
   }

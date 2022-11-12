@@ -1,6 +1,7 @@
 import React from "react";
 import usersPhoto from "../../assets/img/users.png";
 import s from "./Users.module.css";
+import {NavLink} from "react-router-dom";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -12,7 +13,7 @@ const Users = (props) => {
 
   let currP = props.currentPage;
   let currDown = currP - 5 < 0 ? 0 : currP - 5;
-  let currUp = currP + 5;
+  let currUp = currP + 30;
   let shortCarousel = page.slice(currDown, currUp);
 
   return (
@@ -34,10 +35,12 @@ const Users = (props) => {
       {props.users.map((u) => (
         <div>
           <div>
+            <NavLink to={'/profile/' + u.id}>
             <img
               src={u.photos.small != null ? u.photos.small : usersPhoto}
               alt=""
             />
+            </NavLink>
           </div>
           <div>
             {u.follow ? (

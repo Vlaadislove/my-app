@@ -2,11 +2,11 @@ import React from "react";
 import "./App.css";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
-import Profile from "./components/Profile/Profile";
 import News from "./components/News/News";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import DialogsContainer from "./components/Dialogs/DialogsContainer";
 import UsersContainer from "./components/Users/UsersContainer";
+import ProfileContainer from "./components/Profile/ProfileContainer";
 
 const App = (props) => {
   return (
@@ -25,10 +25,11 @@ const App = (props) => {
                 />
               }
             />
+              <Route path={'/profile'} element={<ProfileContainer />}/>
             <Route
-              path="/profile"
+              path="/profile/:userId"
               element={
-                <Profile
+                <ProfileContainer
                   // profilePage={props.state.profilePage}
                   // dispatch={props.dispatch}
                   // addPost={props.addPost}
