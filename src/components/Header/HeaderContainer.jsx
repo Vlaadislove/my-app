@@ -11,11 +11,8 @@ class HeaderContainer extends React.Component {
         `https://social-network.samuraijs.com/api/1.0/auth/me`,
         {
           withCredentials: true
-          //   headers: {
-          //     'Access-Control-Allow-Origin': '*',
-          //     'API-KEY': 'a3dee610-8672-492e-bc57-a678ba9812e5'
         }
-        // }
+
       )
       .then((response) => {
         if (response.data.resultCode === 0) {

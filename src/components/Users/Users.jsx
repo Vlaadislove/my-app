@@ -44,10 +44,24 @@ const Users = (props) => {
             </NavLink>
           </div>
           <div>
-            {u.follow ? (
+            {u.followed ? (
               <button
                 onClick={() => {
-                  props.unfollowed(u.id);
+
+                  axios
+                      .delete(
+                          `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,
+                          {
+                            withCredentials: true,
+                            headers: {'API-KEY' : '059e6886-8406-415a-89a3-61b4ecd478eb'}
+                          }
+                      )
+                      .then((response) => {
+                        console.log('UNFOLLOW:',response.data)
+                        if(response.data.resultCode === 0){
+                          props.unfollowed(u.id)
+                        }
+                      });
                 }}
               >
                 FOLLOW
@@ -55,7 +69,22 @@ const Users = (props) => {
             ) : (
               <button
                 onClick={() => {
-                  props.followed(u.id);
+                  axios
+                      .post(
+                          `https://social-network.samuraijs.com/api/1.0/follow/${u.id}`,{},
+                          {
+                            withCredentials: true,
+                            headers: {'API-KEY' : '059e6886-8406-415a-89a3-61b4ecd478eb'}
+                          }
+                      )
+                      .then((response) => {
+                        console.log('FOLLOW:',response.data)
+                        if(response.data.resultCode === 0){
+                          props.followed(u.id);
+                        }
+                      });
+
+
                 }}
               >
                 UNFOLLOW
