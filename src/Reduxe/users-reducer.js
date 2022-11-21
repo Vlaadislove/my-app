@@ -1,16 +1,20 @@
+import {usersAPI} from "../api/api";
+
 const FOLLOW = "FOLLOW";
 const UNFOLLOW = "UNFOLLOW";
 const SET_USERS = "SET-USERS";
 const SET_TOTAL_USERS_COUNT = "TOTAL_USERS_COUNT";
 const SET_CURRENT_PAGE = "CURRENT_PAGE";
 const SET_IS_FETCHING = "SET_IS_FETCHING";
+const TOGGLE_IS_FOLLOWING_PROGRESS = "TOGGLE_IS_FOLLOWING_PROGRESS";
 
 const initialState = {
   users: [],
   pageSize: 100,
   totalUsersCount: 0,
   currentPage: 1,
-  isFetching: false
+  isFetching: true,
+  followingInProgress: []
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -55,6 +59,13 @@ const usersReducer = (state = initialState, action) => {
         ...state,
         isFetching: action.isFetching
       };
+    case TOGGLE_IS_FOLLOWING_PROGRESS:
+      return {
+        ...state,
+        followingInProgress: action.isFetching
+            ? [...state.followingInProgress, action.userId]
+            : state.followingInProgress.filter(id => id !== action.userId)
+      }
 
     default:
       return state;
@@ -66,17 +77,33 @@ export const followAC = (userId) => {
 };
 export const unfollowAC = (userId) => ({ type: UNFOLLOW, userId });
 export const setUsersAC = (users) => ({ type: SET_USERS, users });
-export const setCurrentPageAC = (currentPage) => ({
-  type: SET_CURRENT_PAGE,
-  currentPage
+export const setCurrentPageAC = (currentPage) => ({type: SET_CURRENT_PAGE, currentPage});
+export const setTotalUsersCountAC = (totalCount) => ({type: SET_TOTAL_USERS_COUNT, count: totalCount});
+export const setIsFetchingAC = (isFetching) => ({type: SET_IS_FETCHING, isFetching});
+export const toggleFollowingProgressAC = (isFetching, userId) => ({
+  type: TOGGLE_IS_FOLLOWING_PROGRESS, isFetching, userId
 });
-export const setTotalUsersCountAC = (totalCount) => ({
-  type: SET_TOTAL_USERS_COUNT,
-  count: totalCount
-});
-export const setIsFetchingAC = (isFetching) => ({
-  type: SET_IS_FETCHING,
-  isFetching
-});
+
+export const getUsersThunk = (currentPage,pageSize) => {
+  return (dispatch) => {
+    dispatch(setIsFetchingAC(true));
+    usersAPI.getUsers(currentPage, pageSize).then((data) => {
+      dispatch(setIsFetchingAC(false));
+      dispatch(setUsersAC(data.items));
+      dispatch(setTotalUsersCountAC(data.totalCount));
+    });
+  }
+}
+export const onPageChange = (pageNumber,pageSize) => {
+  return (dispatch)=> {
+    dispatch(setCurrentPageAC(pageNumber));
+    dispatch(setIsFetchingAC(true));
+    usersAPI.getUsers(pageNumber, pageSize).then((response) => {
+      dispatch(setIsFetchingAC(false));
+      dispatch(setUsersAC(response.data.items));
+    });
+  }
+}
+
 
 export default usersReducer;
