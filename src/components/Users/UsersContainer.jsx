@@ -1,35 +1,22 @@
 import React from "react";
-import {
-  followAC,
-  setCurrentPageAC,
-  setTotalUsersCountAC,
-  setUsersAC,
-  unfollowAC,
-  setIsFetchingAC, toggleFollowingProgressAC
+import {getUsersThunk, unfollowThunk, followThunk
 } from "../../Reduxe/users-reducer";
 import { connect } from "react-redux";
 import Users from "./Users";
 import Preloader from "../../common/Preloader/Preloader";
-import {usersAPI} from "../../api/api";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.props.setIsFetchingAC(true);
-    usersAPI.getUsers(this.props.currentPage, this.props.pageSize).then((data) => {
-      console.log('response:', data)
-        this.props.setIsFetchingAC(false);
-        this.props.setUsersAC(data.items);
-        this.props.setTotalUsersCountAC(data.totalCount);
-      });
+
+    this.props.getUsersThunk(this.props.currentPage, this.props.pageSize)
+
+
   }
   onPageChange = (pageNumber) => {
-    debugger
-    this.props.setCurrentPageAC(pageNumber);
-    this.props.setIsFetchingAC(true);
-    usersAPI.getUsers(pageNumber, this.props.pageSize).then((response) => {
-        this.props.setIsFetchingAC(false);
-        this.props.setUsersAC(response.data.items);
-      });
+
+    this.props.getUsersThunk(pageNumber, this.props.pageSize)
+
   };
 
   render() {
@@ -44,9 +31,8 @@ class UsersContainer extends React.Component {
             currentPage={this.props.currentPage}
             users={this.props.users}
             onPageChange={this.onPageChange}
-            followed={this.props.followAC}
-            unfollowed={this.props.unfollowAC}
-            toggleFollowingProgress={this.props.toggleFollowingProgressAC}
+            followedThunk={this.props.followThunk}
+            unfollowedThunk={this.props.unfollowThunk}
             followingInProgress={this.props.followingInProgress}
           />
         )}
@@ -66,15 +52,9 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  followAC,
-  unfollowAC,
-  setUsersAC,
-  setTotalUsersCountAC,
-  setCurrentPageAC,
-  setIsFetchingAC,
-  toggleFollowingProgressAC
-})(UsersContainer);
+export default withAuthRedirect(connect(mapStateToProps, {
+ getUsersThunk, unfollowThunk, followThunk
+})(UsersContainer));
 
 // const mapDispatchToProps = (dispatch) => {
 //   return {

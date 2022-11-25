@@ -1,9 +1,7 @@
 import React from "react";
 import usersPhoto from "../../assets/img/users.png";
 import s from "./Users.module.css";
-import { NavLink } from "react-router-dom";
-import axios from "axios";
-import {usersAPI} from "../../api/api";
+import {Navigate, NavLink} from "react-router-dom";
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -15,7 +13,7 @@ const Users = (props) => {
 
   let currP = props.currentPage;
   let currDown = currP - 5 < 0 ? 0 : currP - 5;
-  let currUp = currP + 30;
+  let currUp = currP + 20;
   let shortCarousel = page.slice(currDown, currUp);
 
   return (
@@ -49,15 +47,9 @@ const Users = (props) => {
               <button
                 disabled={props.followingInProgress.some( id=> id === u.id)}
                 onClick={() => {
-                  props.toggleFollowingProgress(true, u.id)
-                  usersAPI.unfollow(u.id).then((response) => {
-                        console.log('UNFOLLOW:',response)
-                        if(response.data.resultCode === 0){
-                          props.unfollowed(u.id)
-                          props.toggleFollowingProgress(false, u.id)
-                        }
-                      });
-                }}
+                  props.unfollowedThunk(u.id)
+                }
+              }
               >
                 FOLLOW
               </button>
@@ -65,17 +57,9 @@ const Users = (props) => {
               <button
                 disabled={props.followingInProgress.some( id=> id === u.id)}
                 onClick={() => {
-                  props.toggleFollowingProgress(true, u.id)
-                      usersAPI.follow(u.id).then((response) => {
-                        console.log('FOLLOW:',response)
-                        if(response.data.resultCode === 0){
-                          props.followed(u.id);
-                          props.toggleFollowingProgress(false, u.id)
-                        }
-                      });
-
-
-                }}
+                  props.followedThunk(u.id)
+                }
+              }
               >
                 UNFOLLOW
               </button>

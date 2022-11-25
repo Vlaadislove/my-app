@@ -2,6 +2,7 @@ import React from "react";
 import s from "./Dialogs.module.css";
 import DialogItem from "./DialogItem/DialogItem";
 import Massage from "./Message/Massage";
+import {Navigate} from "react-router-dom";
 
 //                                  Прошлая версия
 //     <DialogItem name={dialogs[0].name} id={dialogs[0].id}/>,
@@ -41,6 +42,9 @@ const Dialogs = (props) => {
 
   ));
   const valueNewMessageText = state.newMessageText;
+
+
+
 
   return (
     <div className={s.dialogs}>

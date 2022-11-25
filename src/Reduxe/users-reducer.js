@@ -86,6 +86,7 @@ export const toggleFollowingProgressAC = (isFetching, userId) => ({
 
 export const getUsersThunk = (currentPage,pageSize) => {
   return (dispatch) => {
+    dispatch(setCurrentPageAC(currentPage))
     dispatch(setIsFetchingAC(true));
     usersAPI.getUsers(currentPage, pageSize).then((data) => {
       dispatch(setIsFetchingAC(false));
@@ -94,16 +95,31 @@ export const getUsersThunk = (currentPage,pageSize) => {
     });
   }
 }
-export const onPageChange = (pageNumber,pageSize) => {
-  return (dispatch)=> {
-    dispatch(setCurrentPageAC(pageNumber));
-    dispatch(setIsFetchingAC(true));
-    usersAPI.getUsers(pageNumber, pageSize).then((response) => {
-      dispatch(setIsFetchingAC(false));
-      dispatch(setUsersAC(response.data.items));
+
+export const followThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.follow(userId).then((response) => {
+      if(response.data.resultCode === 0){
+        dispatch(followAC(userId))
+        dispatch(toggleFollowingProgressAC(false, userId))
+      }
     });
   }
 }
+
+export const unfollowThunk = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleFollowingProgressAC(true, userId))
+    usersAPI.unfollow(userId).then((response) => {
+      if(response.data.resultCode === 0){
+        dispatch(unfollowAC(userId))
+        dispatch(toggleFollowingProgressAC(false, userId))
+      }
+    });
+  }
+}
+
 
 
 export default usersReducer;

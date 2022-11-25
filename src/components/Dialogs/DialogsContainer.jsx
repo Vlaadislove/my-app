@@ -2,6 +2,36 @@ import React from "react";
 import {addMessageActionCreator, updateNewMessageChangeActionCreator} from "../../Reduxe/dialogs-reducer";
 import Dialogs from "./Dialogs";
 import {connect} from "react-redux";
+import {withAuthRedirect} from "../../hoc/withAuthRedirect";
+
+
+const mapStateToProps = (state) => {
+  return {
+    dialogPage: state.dialogPage,
+    // dialogs: state.dialogPage.dialogs,
+    // massages: state.dialogPage.massages,
+    // newMessageText: state.dialogPage.newMessageText
+  }
+}
+const mapDispatchToProps = (dispatch) => {
+  return {
+    addMassage: () => {
+      dispatch(addMessageActionCreator());
+    },
+
+    updateNewMessageChange: (text) => {
+      let action = updateNewMessageChangeActionCreator(text);
+      dispatch(action);
+    }
+  }
+}
+
+let AuthRedirectComponent = withAuthRedirect(Dialogs)
+
+const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(AuthRedirectComponent);
+
+
+export default DialogsContainer;
 
 
 // const DialogsContainerdd = (props) => {
@@ -31,29 +61,3 @@ import {connect} from "react-redux";
 //     </div>
 //   );
 // };
-
-const mapStateToProps = (state) => {
-  return {
-    dialogPage: state.dialogPage
-    // dialogs: state.dialogPage.dialogs,
-    // massages: state.dialogPage.massages,
-    // newMessageText: state.dialogPage.newMessageText
-  }
-}
-const mapDispatchToProps = (dispatch) => {
-  return {
-    addMassage: () => {
-      dispatch(addMessageActionCreator());
-    },
-
-    updateNewMessageChange: (text) => {
-      let action = updateNewMessageChangeActionCreator(text);
-      dispatch(action);
-    }
-  }
-}
-
-const DialogsContainer = connect(mapStateToProps,mapDispatchToProps)(Dialogs);
-
-
-export default DialogsContainer;
