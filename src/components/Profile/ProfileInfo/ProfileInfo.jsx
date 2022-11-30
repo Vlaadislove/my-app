@@ -23,7 +23,10 @@ const ProfileInfo = (props) => {
             alt=""
           />
         </div>
-        <ProfileStatus status={"Hello, testing status!"} />
+        <ProfileStatus
+          status={props.status}
+          updateStatusThunk={props.updateStatusThunk}
+        />
         <div className={s.fullName}>{props.profile.fullName}</div>
         <div>{props.profile.lookingForAJobDescription}</div>
         <div>
