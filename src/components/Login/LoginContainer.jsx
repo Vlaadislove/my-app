@@ -1,7 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
 import Login from "./Login";
-import { authLoginThunk } from "../../Reduxe/login-reducer";
+import {authLoginThunk} from "../../Reduxe/auth-reducer";
 
 class LoginContainer extends React.Component {
   componentDidMount() {
@@ -15,7 +15,7 @@ class LoginContainer extends React.Component {
 
 const mapStateToProps = (state) => {
   return {
-    isAuthLogin: state.login.isAuthLogin
+    isAuth: state.auth.isAuth
   };
 };
 

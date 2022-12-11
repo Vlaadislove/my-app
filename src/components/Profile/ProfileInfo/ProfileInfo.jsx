@@ -3,6 +3,7 @@ import s from "./ProfileInfo.module.css";
 import Preloader from "../../../common/Preloader/Preloader";
 import usersPhoto from "../../../assets/img/users.png";
 import ProfileStatus from "./ProfileStatus";
+import ProfileAvatar from "./ProfileAvatar";
 
 const ProfileInfo = (props) => {
   console.log("PROFILE_INFO: ", props);
@@ -27,6 +28,7 @@ const ProfileInfo = (props) => {
           status={props.status}
           updateStatusThunk={props.updateStatusThunk}
         />
+        <ProfileAvatar />
         <div className={s.fullName}>{props.profile.fullName}</div>
         <div>{props.profile.lookingForAJobDescription}</div>
         <div>

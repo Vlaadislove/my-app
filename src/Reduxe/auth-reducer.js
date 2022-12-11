@@ -15,16 +15,15 @@ const authReducer = (state = initialState, action) => {
       return {
         ...state,
         ...action.data,
-        isAuth: true
       };
     default:
       return state;
   }
 };
 
-export const setAuthUserData = (email, userId, login) => ({
+export const setAuthUserData = (email, userId, login, isAuth) => ({
   type: SET_AUTH_USER_DATA,
-  data: { email, userId, login }
+  data: { email, userId, login, isAuth  }
 });
 
 export const authThunk = () => {
@@ -32,9 +31,32 @@ export const authThunk = () => {
     authAPI.getAuth().then((response) => {
       if (response.data.resultCode === 0) {
         let { email, id, login } = response.data.data;
-        dispatch(setAuthUserData(email, id, login));
+        dispatch(setAuthUserData(email, id, login, true));
       }
     });
+  }
+}
+
+export const authLoginThunk = (email, password) => {
+  return (dispatch) => {
+    authAPI.postLogin(email, password).then((response) => {
+      // console.log(response.data.resultCode);
+      // console.log(email, password);
+      if (response.data.resultCode === 0) {
+        console.log("setLOGIN: ", email, password);
+        dispatch(authThunk())
+      }
+    });
+  };
+};
+
+export const deleteLoginThunk = () =>{
+  return (dispatch) => {
+    authAPI.deleteLogin().then(response => {
+      if(response.data.resultCode === 0){
+        dispatch(setAuthUserData(null, null, null, false))
+      }
+    })
   }
 }
 

@@ -16,12 +16,11 @@ const Login = (props) => {
   });
 
   const onSubmit = (data) => {
-    console.log(data);
     props.authLoginThunk(data.email, data.password);
     reset();
   };
 
-  if (props.isAuthLogin) {
+  if (props.isAuth) {
     return <Navigate to={"/profile"} />;
   }
 

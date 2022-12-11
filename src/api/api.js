@@ -35,6 +35,10 @@ export const profileAPI = {
 
   updateStatus(status) {
     return instance.put(`profile/status/`, { status: status });
+  },
+
+  updateAvatar(formData) {
+    return instance.put(`/profile/photo`, formData)
   }
 };
 
@@ -47,5 +51,8 @@ export const authAPI = {
       email: email,
       password: password
     });
+  },
+  deleteLogin() {
+    return instance.delete("auth/login")
   }
 };
