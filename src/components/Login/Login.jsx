@@ -2,6 +2,8 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import s from "./Login.module.css";
 import { Navigate } from "react-router-dom";
+import {authLoginThunk} from "../../Reduxe/auth-reducer";
+import {logDOM} from "@testing-library/react";
 
 const Login = (props) => {
   console.log("Login:", props);
@@ -10,13 +12,15 @@ const Login = (props) => {
     register,
     formState: { errors },
     handleSubmit,
-    reset
+    reset,
+    setError,
+    clearErrors
   } = useForm({
     mode: "onBlur"
   });
 
   const onSubmit = (data) => {
-    props.authLoginThunk(data.email, data.password);
+    props.authLoginThunk(data.email, data.password,setError);
     reset();
   };
 
@@ -39,6 +43,7 @@ const Login = (props) => {
               }
             })}
             placeholder={"Email"}
+            onFocus={()=>clearErrors()}
           />
           <br />
           <div>
@@ -50,11 +55,13 @@ const Login = (props) => {
             {...register("password", { required: true })}
             type="password"
             placeholder={"Password"}
+            onFocus={()=>clearErrors()}
           />{" "}
           <br />
           <input {...register("rememberMe")} type="checkbox" />
           Remember me
         </div>
+        {errors.server && ( <p className={s.paragraf}>{errors.server.message}</p>)}
         <button type="submit">Enter</button>
       </form>
     </div>

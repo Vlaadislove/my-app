@@ -1,4 +1,5 @@
 import {authAPI} from "../api/api";
+import massage from "../components/Dialogs/Message/Massage";
 
 const SET_AUTH_USER_DATA = "SET_AUTH_USER_DATA";
 
@@ -37,14 +38,19 @@ export const authThunk = () => {
   }
 }
 
-export const authLoginThunk = (email, password) => {
+export const authLoginThunk = (email, password, setError) => {
   return (dispatch) => {
     authAPI.postLogin(email, password).then((response) => {
       // console.log(response.data.resultCode);
       // console.log(email, password);
+      console.log("setLOGIN: ", response.data.messages[0]);
       if (response.data.resultCode === 0) {
-        console.log("setLOGIN: ", email, password);
+        console.log("setLOGIN: ", response);
         dispatch(authThunk())
+      }
+      else {
+        // let message = response.data.messages[0]
+        setError('server', {message: response.data.messages[0]})
       }
     });
   };

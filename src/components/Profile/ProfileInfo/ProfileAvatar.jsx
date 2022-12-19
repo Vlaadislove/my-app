@@ -26,6 +26,12 @@ class ProfileAvatar extends React.Component {
       <div>
         <input type="file" name='file' onChange={this.addAvatar} /> <br/>
         <button onClick={this.putAvatar}>Отправить</button>
+        {/*<div>*/}
+        {/*  <label htmlFor="filePicker" style={{ background:"grey", padding:"5px 10px" }}>*/}
+        {/*    My custom choose file label*/}
+        {/*  </label>*/}
+        {/*  <input id="filePicker" style={{visibility:"hidden"}} type={"file"}></input>*/}
+        {/*</div>*/}
       </div>
     );
   }
